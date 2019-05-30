@@ -8,8 +8,8 @@ int ParticaoM3(int *arr, int begin, int end) {
     int i = begin, j = end;
 
     while(i <= j) {
-        while(arr[i] < pivot) i++;
-        while(arr[j] > pivot) j--;
+        while(arr[i] < pivot) {n_comp++; i++;}
+        while(arr[j] > pivot) {n_comp++; j--;}
         if(i <= j) {
             Swap(arr, i, j);
             i++; j--;

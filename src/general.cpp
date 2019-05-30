@@ -3,10 +3,16 @@
 #include <iostream>
 #include "subdiretorio/general.h"
 
+long n_comp = 0;
+long n_mov = 0;
+int *tempos_exec = nullptr;
+int n_testes = 0;
+
 void Swap(int *arr, int a, int b) {
     int temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
+    n_mov += 2;
 }
 
 void PrintArray(int *arr, int size) {
@@ -15,6 +21,7 @@ void PrintArray(int *arr, int size) {
         std::cout << arr[i] << " ";
     std::cout << std::endl;
 }
+
 
 int Max(int a, int b) {
     return a > b ? a : b;
