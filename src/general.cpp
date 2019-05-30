@@ -1,11 +1,19 @@
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 #include "subdiretorio/general.h"
 
 void Swap(int *arr, int a, int b) {
     int temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
+}
+
+void PrintArray(int *arr, int size) {
+    int i;
+    for(i = 0; i < size; i++)
+        std::cout << arr[i] << " ";
+    std::cout << std::endl;
 }
 
 int Max(int a, int b) {
@@ -20,11 +28,11 @@ int Median(int a, int b, int c) {
     return Max(Min(a,b), Min(Max(a,b),c));
 }
 
-void Insertionsort(int *arr, int size) {
+void Insertionsort(int *arr, int begin, int end) {
     int i, j;
     long aux;
 
-    for(i = 1; i < size; i++) {
+    for(i = begin+1; i <= end; i++) {
         aux = arr[i];
         j = i - 1;
         while(j >= 0 && aux < arr[j]) {

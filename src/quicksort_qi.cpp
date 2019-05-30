@@ -1,20 +1,20 @@
 #include "subdiretorio/quicksort_m3.h"
 #include "subdiretorio/general.h"
 
-void OrdenaQI(int *arr, int begin, int end, int percent) {
-    int q = ParticaoM3(arr, begin, end);
-    
-    if((q - begin +1) <= (end - begin +1)/(100/percent)) {
-        Insertionsort(arr, q - begin +1);
+void OrdenaQI(int *arr, int begin, int end, int percent, int init_size) {
+    int current_percent = ((end - begin) * 100)/init_size;
+    if(current_percent < percent) {
+        Insertionsort(arr, begin, end);
     }
     else {
+        int q = ParticaoM3(arr, begin, end);
         if(begin < q-1) 
-            OrdenaM3(arr, begin, q-1);
+            OrdenaQI(arr, begin, q-1, percent, init_size);
         if(end > q) 
-            OrdenaM3(arr, q, end);
+            OrdenaQI(arr, q, end, percent, init_size);
     } 
 }
 
 void QuicksortQI(int *arr, int size, int percent) {
-    OrdenaQI(arr, 0, size-1, percent);
+    OrdenaQI(arr, 0, size-1, percent, size);
 }
