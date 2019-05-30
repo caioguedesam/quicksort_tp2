@@ -8,6 +8,8 @@ extern int n_testes;
 
 void Swap(int *arr, int a, int b);
 void PrintArray(int *arr, int size);
+void PrintAllArrays(int **arr, int size, int testes);
+int **CopyArray(int **arr_origin, int size, int testes);
 
 int Max(int a, int b);
 int Min(int a, int b);

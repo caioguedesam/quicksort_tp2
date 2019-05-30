@@ -22,6 +22,23 @@ void PrintArray(int *arr, int size) {
     std::cout << std::endl;
 }
 
+void PrintAllArrays(int **arr, int size, int testes) {
+    int i;
+    for(i = 0; i < testes; i++)
+        PrintArray(arr[i], size);
+}
+
+int **CopyArray(int **arr_origin, int size, int testes) {
+    int i, j, **arr_dest = new int*[testes];
+    for(i = 0; i < testes; i++) {
+        arr_dest[i] = new int[size];
+        for(j = 0; j < size; j++) {
+            arr_dest[i][j] = arr_origin[i][j];
+        }
+    }
+
+    return arr_dest;
+}
 
 int Max(int a, int b) {
     return a > b ? a : b;

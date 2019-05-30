@@ -19,20 +19,26 @@ int main(int argc, char *argv[])
     srand(time(NULL));
     // Argumentos do programa
     std::string sort_type = std::string(argv[1]), arr_type = std::string(argv[2]);
-    int size = atoi(argv[3]), i;
-
+    int size = atoi(argv[3]), i, j;
 
     // Fazendo o vetor:
     int **arr = new int*[n_testes];
 
     for(i = 0; i < n_testes; i++) {
-        if(arr_type == "Ale")
+        if(arr_type == "Ale") {
             arr[i] = MakeRandomArray(size);
-        else if(arr_type == "OrdC")
+        }
+        else if(arr_type == "OrdC") {
             arr[i] = MakeSortedArray(size, 'C');
-        else if(arr_type == "OrdD")
+        }
+        else if(arr_type == "OrdD") {
             arr[i] = MakeSortedArray(size, 'D');
+        }
     }
+
+    int **arr_desord = nullptr;
+    if(argc == 5 && std::string(argv[4]) == "-p")
+        arr_desord = CopyArray(arr, size, n_testes);
 
     // Ordenando:
     for(i = 0; i < n_testes; i++) {
@@ -66,11 +72,20 @@ int main(int argc, char *argv[])
     std::cout << sort_type << " " << arr_type << " " << size << " " 
             << n_comp/n_testes << " " << n_mov/n_testes << " " << tempo_mediana << std::endl;
 
+    if(argc == 5 && std::string(argv[4]) == "-p")
+        PrintAllArrays(arr_desord, size, n_testes);
 
+    // Deletando vetores alocados
     if(arr != nullptr) {
         for(i = 0; i < n_testes; i++)
-            delete arr[i];
-        delete arr;
+            delete[] arr[i];
+        delete[] arr;
     }
+    if(arr_desord != nullptr) {
+        for(i = 0; i < n_testes; i++)
+            delete[] arr_desord[i];
+        delete[] arr_desord;
+    }
+    
     return 0;
 }
