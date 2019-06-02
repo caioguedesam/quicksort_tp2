@@ -60,10 +60,13 @@ void Insertionsort(int *arr, int begin, int end) {
         aux = arr[i];
         j = i - 1;
         while(j >= 0 && aux < arr[j]) {
+            n_comp++;
             arr[j+1] = arr[j];
+            n_mov++;
             j--;
         }
         arr[j+1] = aux;
+        n_mov++;
     }
 }
 
