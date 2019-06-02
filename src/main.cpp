@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <chrono>
-#include <fstream>
 #include "subdiretorio/quicksort_c.h"
 #include "subdiretorio/quicksort_m3.h"
 #include "subdiretorio/quicksort_pe.h"
@@ -13,8 +12,6 @@ using namespace std::chrono;
 
 int main(int argc, char *argv[])
 {
-    std::ofstream output;
-    output.open("output.csv", std::fstream::app);
 
     n_testes = 20;
     tempos_exec = new int[n_testes];
@@ -25,7 +22,7 @@ int main(int argc, char *argv[])
     std::string sort_type = std::string(argv[1]), arr_type = std::string(argv[2]);
     int size = atoi(argv[3]), i, j;
 
-    // Fazendo o vetor:
+    // Fazendo os vetores:
     int **arr = new int*[n_testes];
 
     for(i = 0; i < n_testes; i++) {
@@ -40,6 +37,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Armazenando vetores originais: 
     int **arr_desord = nullptr;
     if(argc == 5 && std::string(argv[4]) == "-p")
         arr_desord = CopyArray(arr, size, n_testes);
@@ -66,6 +64,7 @@ int main(int argc, char *argv[])
         tempos_exec[i] = int(duration.count());
     }
 
+    // Obtendo a mediana dos tempos de ordenação (ordena o vetor de tempos e obtém o meio):
     QuicksortClassico(tempos_exec, n_testes);
     int tempo_mediana;
     if(n_testes%2 == 0)
@@ -73,17 +72,12 @@ int main(int argc, char *argv[])
     else
         tempo_mediana = tempos_exec[n_testes/2]; 
 
+    // Imprimindo saídas:
     std::cout << sort_type << " " << arr_type << " " << size << " " 
             << n_comp/n_testes << " " << n_mov/n_testes << " " << tempo_mediana << std::endl;
-    if(output.is_open()) {
-        output << sort_type << "," << arr_type << "," << size << "," 
-            << n_comp/n_testes << "," << n_mov/n_testes << "," << tempo_mediana << std::endl;
-    }
 
     if(argc == 5 && std::string(argv[4]) == "-p")
         PrintAllArrays(arr_desord, size, n_testes);
-
-    output.close();
 
     // Deletando vetores alocados
     if(arr != nullptr) {
