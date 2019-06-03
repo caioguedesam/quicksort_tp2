@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <fstream>
 #include "subdiretorio/quicksort_c.h"
 #include "subdiretorio/quicksort_m3.h"
 #include "subdiretorio/quicksort_pe.h"
@@ -13,6 +14,8 @@ using namespace std::chrono;
 int main(int argc, char *argv[])
 {
 
+    std::fstream output;
+    output.open("../output.csv", std::fstream::app);
     n_testes = 20;
     tempos_exec = new int[n_testes];
 
@@ -75,9 +78,15 @@ int main(int argc, char *argv[])
     // Imprimindo saídas:
     std::cout << sort_type << " " << arr_type << " " << size << " " 
             << n_comp/n_testes << " " << n_mov/n_testes << " " << tempo_mediana << std::endl;
+    if(output.is_open()) {
+        output << 0 << "," << sort_type << "," << arr_type << "," << size << "," 
+            << n_comp/n_testes << "," << n_mov/n_testes << "," << tempo_mediana << std::endl;
+    }
 
     if(argc == 5 && std::string(argv[4]) == "-p")
         PrintAllArrays(arr_desord, size, n_testes);
+
+    output.close();
 
     // Deletando vetores alocados
     if(arr != nullptr) {
