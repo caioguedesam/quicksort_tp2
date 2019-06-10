@@ -1,3 +1,10 @@
+/*
+Trabalho Prático 2 - Biblioteca Digital de Arendelle (Comparação de Quicksorts)
+DCC205 - Estruturas de dados - 2019/1 - UFMG
+Aluno: Caio Guedes de Azevedo Mota
+Professor: Luiz Chaimowicz
+ */
+
 #include <iostream>
 #include <string>
 #include <chrono>

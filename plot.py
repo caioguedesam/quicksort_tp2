@@ -1,8 +1,10 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import pandas as pd
+# Lendo documento temporário de saídas (Legado)
 data = pd.read_csv('../output.csv')
 
+# Armazenando vetores com resultados
 random_time = data[data['Variação do Vetor'] == 'Ale'].loc[:,['Variação do Quicksort', 'Tamanho do Vetor', 'Tempo']]
 random_comp = data[data['Variação do Vetor'] == 'Ale'].loc[:,['Variação do Quicksort', 'Tamanho do Vetor', 'Comparações']]
 random_mov = data[data['Variação do Vetor'] == 'Ale'].loc[:,['Variação do Quicksort', 'Tamanho do Vetor', 'Movimentações']]
